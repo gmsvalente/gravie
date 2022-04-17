@@ -1,6 +1,9 @@
 (ns gravie.frontend.ui
-  (:require [reagent.core :as r]))
+  (:require [reagent.core :as r]
+            [gravie.frontend.theme :refer [with-theme]]))
 
 (defn app-ui []
-  [:div [:h1 "Gravie GiantBomb"]])
+  (with-theme
+    [:div
+     [:h1 "Gravie GiantBomb"]]))
 
