@@ -1,5 +1,8 @@
-.backups~/
 .nrepl-port
+
+.cpcache/
+.backups~/
 .shadow-cljs/
+
 node_modules/
 public/js/
