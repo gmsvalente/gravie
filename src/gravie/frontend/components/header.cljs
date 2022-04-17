@@ -17,13 +17,16 @@
            :z-indez 1000}
    ".header" {:display "flex"
               :justify-content "space-between"
-              :align-items "center"}
+              :align-items "center"
+              :height "100px"}
    ".images-list" {:display "flex"
-                   :margin "10px"
-                   :width "240px"
-                   :justify-content "space-between"
+                   :width "340px"
+                   :justify-content "space-around"
                    :align-items "center"}
-   })
+   ".gravie-logo" {:width "127px"
+                   :height "36px"}
+   ".giantbomb-logo" {:width "100px"
+                      :heidht "24px"}})
 
 
 (defn header* [{:keys [class-name]}]
@@ -31,18 +34,11 @@
    [app-bar {:class "bar"}
     [toolbar {:class "header"}
      [:div {:class "images-list"}
-      [:img {:src gravie-logo-src
-             :width "127px"
-             :height "36px"}]
-      [:img {:width "100px"
-             :heidht "24px"
+      [:img {:class "gravie-logo"
+             :src gravie-logo-src}]
+      [:img {:class "giantbomb-logo"
              :src giantbomb-logo-src}]]
-
-                                        ;typography {:class "header-title"} "Gravie GiantBomb"
-       
      [:div 
-      [icon-button {:color "primary"} [dark-mode]]
-      [fab {:color "secondary"}
-       [shopping-cart]]]]]])
+      [icon-button {:color "primary"} [dark-mode]]]]]])
 
 (def header (styled header* header-styles))
