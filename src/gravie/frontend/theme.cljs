@@ -13,8 +13,8 @@
 
 
 (def custom-theme
-  {:palette {:primary colors/red
-             :secondary colors/amber
+  {:palette {:primary colors/blue
+             :secondary colors/red
              :mode system-theme-mode}})
 
 (defn with-theme [& children]
