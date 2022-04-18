@@ -2,8 +2,6 @@
   (:require [reitit.ring :as ring ]
             [reitit.ring.middleware.parameters :refer [parameters-middleware]]
             [reitit.ring.middleware.muuntaja :as muuntaja]
-            [reitit.ring.coercion :as coercion]
-            [reitit.coercion.spec :as rcs]
             [muuntaja.core :as m]
             [gravie.backend.handlers :as h]))
 
