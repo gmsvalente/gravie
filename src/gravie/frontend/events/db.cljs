@@ -3,6 +3,8 @@
             [gravie.frontend.theme :refer [custom-theme]]))
 
 (def init-db {:theme custom-theme
+              :ui {:logo {:giantbomb nil
+                          :gravie nil}}
               :user {}
               :cart {}
               :games {}})
@@ -12,3 +14,7 @@
  (fn [_]
    {:app init-db}))
 
+(rf/reg-event-db
+ ::set-logo
+ (fn [db [_ in logo]]
+   (assoc-in db [:ui :logo in] logo)))
