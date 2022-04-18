@@ -7,6 +7,5 @@
   (rdom/render app-ui (.. js/document (getElementById "root"))))
 
 (defn init []
-  (println "Init")
   (initialize-db)
   (render))

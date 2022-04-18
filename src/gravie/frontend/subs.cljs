@@ -2,6 +2,11 @@
   (:require [re-frame.core :as rf]))
 
 (rf/reg-sub
+ ::theme
+ (fn [db]
+   (:theme db)))
+
+(rf/reg-sub
  ::gb-logo
  (fn [db]
    (get-in db [:ui :logo :giantbomb])))
