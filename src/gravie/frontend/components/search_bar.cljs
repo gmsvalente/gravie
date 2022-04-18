@@ -8,9 +8,11 @@
             [reagent-mui.icons.search :refer [search]]
             [reagent.core :as r]
             [gravie.frontend.utils :refer [get-key tgt-val]]
-            ))
 
-(def search-options [{:name "games"
+            [re-frame.core :as rf]
+            [gravie.frontend.events.http :as http]))
+
+(def search-options [{:name "game"
                       :key 0}
                      {:name "videos"
                       :key 1}])
@@ -43,7 +45,9 @@
          (for [opt search-options]
            [menu-item {:key (:key opt)
                        :value (:name opt)} (:name opt)])]
-        [icon-button {:variant "outlined"} [search]]
+        [icon-button {:variant "outlined"
+                      :on-click #(rf/dispatch [::http/request @search-string @option])}
+         [search]]
         [input-base {:class "input"
                      :on-change #(reset! search-string (tgt-val %))
                      :on-key-down #(when (= 13 (get-key %))

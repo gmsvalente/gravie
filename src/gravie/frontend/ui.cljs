@@ -10,5 +10,4 @@
   (with-theme
     [header]
     [cart]
-    [:div {:style {:margin "10 auto"}}
-     [search-bar]]))
+    [search-bar]))
