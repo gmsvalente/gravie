@@ -12,7 +12,7 @@
 (rf/reg-event-db
  ::init-db
  (fn [_]
-   {:app init-db}))
+   init-db))
 
 (rf/reg-event-db
  ::set-logo
