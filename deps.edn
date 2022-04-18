@@ -4,7 +4,8 @@
         environ/environ {:mvn/version "1.2.0"}
         ring/ring {:mvn/version "1.9.5"}
         metosin/reitit {:mvn/version "0.5.15"}
-        hiccup/hiccup {:mvn/version "2.0.0-alpha2"}}
+        hiccup/hiccup {:mvn/version "2.0.0-alpha2"}
+        clj-http/clj-http {:mvn/version "3.12.3"}}
 
  :aliases
  {:test {:extra-paths ["test"]
