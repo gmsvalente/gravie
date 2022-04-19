@@ -8,7 +8,6 @@
             [reagent-mui.icons.search :refer [search]]
             [reagent.core :as r]
             [gravie.frontend.utils :refer [get-key tgt-val]]
-
             [re-frame.core :as rf]
             [gravie.frontend.events.http :as http]))
 
@@ -34,7 +33,6 @@
   (let [option (r/atom "")
         search-string (r/atom "")]
     (fn []
-      (println "> " @search-string)
       [:div {:class class-name}
        [paper {:class "input-box"}
         [text-field {:class "options"
@@ -51,7 +49,7 @@
         [input-base {:class "input"
                      :on-change #(reset! search-string (tgt-val %))
                      :on-key-down #(when (= 13 (get-key %))
-                                     (.. js/console (log "pressed enter")))
+                                     (rf/dispatch [::http/request @search-string @option]))
                      :placeholder (str "Search " (.toUpperCase @option) " here")}]]])))
 
 (def search-bar (styled search-bar* search-bar-style))
