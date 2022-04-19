@@ -7,7 +7,8 @@
             [reagent-mui.icons.dark-mode :refer [dark-mode]]
             [gravie.frontend.events :refer [set-logo]]
             [gravie.frontend.subs :as subs]
-            [re-frame.core :as rf]))
+            [re-frame.core :as rf]
+            [gravie.frontend.events.theme :as theme]))
 
 (def giantbomb-logo-src "https://camo.githubusercontent.com/b7216da3d2ecd6101cc024529ef2b5619ba3480a8a7913855817965741a6480b/68747470733a2f2f75706c6f61642e77696b696d656469612e6f72672f77696b6970656469612f656e2f342f34622f4769616e745f426f6d625f6c6f676f2e706e67")
 
@@ -47,10 +48,10 @@
               :justify-content "space-between"
               :align-items "center"
               :height "100px"}
-   ".images-list" {:display "flex"
-                   :width "340px"
-                   :justify-content "space-around"
-                   :align-items "center"}
+   ".logo-box" {:display "flex"
+                :width "340px"
+                :justify-content "space-around"
+                :align-items "center"}
    ".gravie-logo" {:width "127px"
                    :height "36px"}
    ".gravie-title" {:font-family "Rajdhani"
@@ -68,10 +69,11 @@
   [:div {:class class-name }
    [app-bar {:class "bar"}
     [toolbar {:class "header"}
-     [:div {:class "images-list"}
+     [:div {:class "logo-box"}
       @(rf/subscribe [::subs/gravie-logo])
       @(rf/subscribe [::subs/gb-logo])]
      [:div 
-      [icon-button {:color "primary"} [dark-mode]]]]]])
+      [icon-button {:on-click #(rf/dispatch [::theme/change-theme-mode])
+                    :color "primary"} [dark-mode]]]]]])
 
 (def header (styled header* header-styles))
