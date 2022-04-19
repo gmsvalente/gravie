@@ -10,14 +10,18 @@
   (str gb-uri "?api_key=" api "&format=json&query=" query "&resources=" resources))
 
 
-(defn get-search [uri]
+(defn try-search [query resources]
   (try
-    (client/get uri {:headers {:user-agent "ClojureGiantBombs"}
-                     :as :json})
+    (client/get gb-uri {:query-params {:api_key api
+                                       :format "json"
+                                       :query query
+                                       :resources resources}
+                        :headers {:user-agent "ClojureGiantBombs"}
+                        :as :json})
     (catch Exception e
-      {:body (json/read-json (:body (ex-data e)))})))
+      (-> (ex-data e)
+          (update :body json/read-json)))))
 
-(defn search-gb [{:strs [query resources] :as qp}]
-  (let [uri (create-uri query resources)
-        response (get-search uri)]
+(defn search-gb [{:strs [query resources]}]
+  (let [response (try-search query resources)]
     (:body response)))
