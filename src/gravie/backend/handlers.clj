@@ -1,6 +1,6 @@
 (ns gravie.backend.handlers
   (:require [hiccup.page :as hp]
-            [gravie.backend.http :refer [search-api]]))
+            [gravie.backend.http :refer [search-gb]]))
 
 (defn land-page [_]
   {:status 200
@@ -9,9 +9,8 @@
           [:script {:src "/js/main.js"}])})
 
 (defn search [{:keys [query-params] :as req}]
-  (let [{:strs [query resources]} query-params]
-    {:status 200
-     :body (search-api query resources)}))
+  {:status 200
+   :body (search-gb query-params)})
 
 (defn checkout [req]
     {:status 200
