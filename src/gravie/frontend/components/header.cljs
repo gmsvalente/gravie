@@ -73,7 +73,6 @@
       @(rf/subscribe [::subs/gravie-logo])
       @(rf/subscribe [::subs/gb-logo])]
      [:div 
-      [icon-button {:on-click #(rf/dispatch [::theme/change-theme-mode])
-                    :color "primary"} [dark-mode]]]]]])
+      [icon-button {:on-click #(rf/dispatch [::theme/change-theme-mode])} [@(rf/subscribe [::subs/mode-icon])]]]]]])
 
 (def header (styled header* header-styles))
