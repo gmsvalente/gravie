@@ -6,7 +6,9 @@
             [gravie.frontend.components.result-view :refer [result-view]]
             [gravie.frontend.components.checkout :refer [checkout-dialog]]))
 
-(defn app-ui []
+(defn app-ui
+  "App reagent ui"
+  []
   [with-theme
    [header]
    [cart]
