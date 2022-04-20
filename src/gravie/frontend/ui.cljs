@@ -10,4 +10,4 @@
    [header]
    [cart]
    [search-bar]
-   [result-view {:results [0 1 2 3]}]])
+   [result-view]])
