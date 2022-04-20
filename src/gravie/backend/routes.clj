@@ -10,7 +10,7 @@
    (ring/router
     [["/" {:name ::root
            :handler h/land-page}]
-     ["/search/" {:name ::search
+     ["/search" {:name ::search
                   :get {:handler h/search}
                   :middleware [parameters-middleware]}]
      ["/checkout" {:name ::checkout

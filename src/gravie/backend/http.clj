@@ -1,10 +1,9 @@
 (ns gravie.backend.http
-  (:require [clj-http.client :as client]
-            [clojure.data.json :as json]))
+  (:require [clj-http.client :as client]))
 
 (def api "5af4db5be8e3d4d626e3640e67a79d12dd5e6482")
 
-(def gb-uri "https://www.giantbomb.com/api/search/")
+(def gb-uri "https://www.giantbomb.com/api/search")
 
 (defn try-search [query resources]
   (try
