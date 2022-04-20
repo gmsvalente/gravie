@@ -62,8 +62,10 @@
            ^{:key (:uuid item)}
            [item-content item]))]
       [dialog-actions
-       [button {:on-click on-close-fn} "Rent more!"]
-       [button {:variant "outlined"
+       [button {:on-click on-close-fn
+                :variant "outlined"
+                :color "warning"} "Rent more!"]
+       [button {:variant "contained"
                 :color "success"} "Checkout"]]]]))
 
 (def checkout-dialog

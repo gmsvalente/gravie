@@ -8,7 +8,9 @@
 (defn result-view-style
   "Result view style map"
   [theme]
-  {".results" {:padding "17px"}})
+  {".results" {:position "absolute"
+               :margin-top "250px"
+               :padding "17px"}})
 
 (defn result-view*
   "Reagent result-view"

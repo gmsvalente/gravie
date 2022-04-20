@@ -55,9 +55,10 @@
 
 (defn header-styles
   "Styles map"
-  [theme]
+  [{:keys [theme]}]
   {".bar" {:position "relative"
-           :z-indez 1000}
+           :width "100%"
+           :z-index 1000}
    ".header" {:display "flex"
               :justify-content "space-between"
               :align-items "center"

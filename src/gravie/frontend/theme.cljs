@@ -1,6 +1,7 @@
 (ns gravie.frontend.theme
   (:require [reagent-mui.styles :refer [theme-provider create-theme]]
             [reagent-mui.material.css-baseline :refer [css-baseline]]
+            [reagent-mui.colors :as colors]
             [gravie.frontend.utils :refer [<sub]]
             [gravie.frontend.subs :as subs]))
 
@@ -16,7 +17,7 @@
 
 (def custom-theme
   "Custom mui theme"
-  {:palette {:primary {:main "#176fd9"}
+  {:palette {:primary colors/yellow
              :secondary {:main "#ec2024"}
              :mode system-theme-mode}})
 
