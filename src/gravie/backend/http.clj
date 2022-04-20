@@ -15,6 +15,7 @@
     (client/get gb-uri {:query-params {:api_key api
                                        :format "json"
                                        :query query
+                                       :field_list "name,id,image,platforms,description,deck"
                                        :resources resources}
                         :headers {:user-agent "ClojureGiantBombs"}
                         :as :json})
