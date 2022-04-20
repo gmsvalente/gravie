@@ -12,9 +12,7 @@
             [gravie.frontend.events.http :as http]))
 
 (def search-options [{:name "game"
-                      :key 0}
-                     {:name "videos"
-                      :key 1}])
+                      :key 0}])
 
 (def search-bar-style
   {".options" {:width "15ch"
