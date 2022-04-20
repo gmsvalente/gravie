@@ -35,8 +35,7 @@
             :min-height "350px"}
    ".platforms" {:margin-top "7px"
                  :max-height "200px"
-                 :overflow "auto"}
-   ".image" {:height "50%"}})
+                 :overflow "auto"}})
 
 (defn game-view* [{:keys [class-name game]}]
   (let [{:keys [name platforms image deck]} game
@@ -49,10 +48,8 @@
       [:div {:class class-name}
        [card {:class "card"}
         [card-header {:title name}]
-        [:div {:class "image"}
-         [card-media {:component "img"
-                      :image (:medium-url image)
-                      :height "100%"}]]
+        [card-media {:component "img"
+                     :image (:medium-url image)}]
         [card-content deck]
         [paper {:class "info"}
          [card-content
