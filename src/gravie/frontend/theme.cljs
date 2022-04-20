@@ -23,7 +23,6 @@
 (defn with-theme
   "Mui theme wraper"
   [& children]
-  (fn []
-    [theme-provider (create-theme (clj->js (<sub [::subs/theme])))
-     [css-baseline]
-     (into [:<>] children)]))
+  [theme-provider (create-theme (clj->js (<sub [::subs/theme])))
+   [css-baseline]
+   (into [:<>] children)])
