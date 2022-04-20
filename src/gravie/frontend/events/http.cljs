@@ -4,14 +4,22 @@
             [re-frame.core :as rf]))
 
 (rf/reg-event-db
+ ::results-view
+ (fn [db [_ type]]
+   (assoc db :result-view type)))
+
+(rf/reg-event-fx
  ::success
- (fn [db [_ response]]
-   (assoc db :response response)))
+ (fn [{:keys [db]} [_ type response]]
+   {:db (-> db
+            (assoc :search-response response)
+            (assoc-in [:search-response :type] type ))
+    :fx [[:dispatch [::results-view type]]]}))
 
 (rf/reg-event-db
  ::error
  (fn [db [_ response]]
-   (assoc db :response response)))
+   (assoc db :error-response response)))
 
 (rf/reg-event-fx
  ::request
@@ -22,5 +30,5 @@
                           :resources type}
                  :format (ajax/json-request-format )
                  :response-format (ajax/json-response-format  {:keywords? true})
-                 :on-success [::success]
+                 :on-success [::success (keyword type)]
                  :on-failure [::error]}}))

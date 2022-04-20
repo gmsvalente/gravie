@@ -4,6 +4,11 @@
             [reagent-mui.icons.light-mode :refer [light-mode]]))
 
 (rf/reg-sub
+ ::results
+ (fn [db]
+   (-> db :search-response :results)))
+
+(rf/reg-sub
  ::theme
  (fn [db]
    (:theme db)))
@@ -33,6 +38,5 @@
  ::gravie-logo
  (fn [db]
    (get-in db [:ui :logo :gravie])))
-
 
 
