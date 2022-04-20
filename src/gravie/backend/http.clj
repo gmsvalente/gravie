@@ -6,10 +6,6 @@
 
 (def gb-uri "https://www.giantbomb.com/api/search/")
 
-(defn create-uri [query resources]
-  (str gb-uri "?api_key=" api "&format=json&query=" query "&resources=" resources))
-
-
 (defn try-search [query resources]
   (try
     (client/get gb-uri {:query-params {:api_key api
@@ -18,7 +14,7 @@
                                        :field_list "name,id,image,platforms,description,deck"
                                        :resources resources}
                         :headers {:user-agent "ClojureGiantBombs"}
-                        :as :json})
+                        :accept :json})
     (catch Exception e
       (-> (ex-data e)
           (update :body json/read-json)))))
