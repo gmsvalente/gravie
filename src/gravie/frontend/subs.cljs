@@ -4,6 +4,11 @@
             [reagent-mui.icons.light-mode :refer [light-mode]]))
 
 (rf/reg-sub
+ ::checkout-open?
+ (fn [db]
+   (-> db :ui :checkout :open?)))
+
+(rf/reg-sub
  ::cart-items
  (fn [db]
    (:cart db)))

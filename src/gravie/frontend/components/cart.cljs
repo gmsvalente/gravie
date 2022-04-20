@@ -4,7 +4,8 @@
             [reagent-mui.material.badge :refer [badge]]
             [reagent-mui.icons.shopping-cart :refer [shopping-cart]]
             [re-frame.core :as rf]
-            [gravie.frontend.subs :as subs]))
+            [gravie.frontend.subs :as subs]
+            [gravie.frontend.events.checkout :as checkout]))
 
 (defn cart-style [theme]
   {".cart-box" {:margin-right "15px"
@@ -20,7 +21,8 @@
             :color "success"
             :badge-content @(rf/subscribe [::subs/cart-count])}
      [fab {:class "cart-button"
-           :color "secondary"}
+           :color "secondary"
+           :on-click #(rf/dispatch [::checkout/open])}
       [shopping-cart]]]]])
 
 (def cart (styled cart* cart-style))

@@ -4,8 +4,8 @@
 
 (def init-db {:theme custom-theme
               :ui {:logo {:giantbomb nil
-                          :gravie nil}}
-              :user {}
+                          :gravie nil}
+                   :checkout {:open? false}}
               :cart []
               :games {}})
 
