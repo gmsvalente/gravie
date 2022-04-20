@@ -6,11 +6,15 @@
   {:status 200
    :body (hp/html5 {}
           [:head
+           [:title "Gravie GiantBom"]
+           [:link {:rel "preconnect" :href "https://fonts.googleapis.com"}]
+           [:link {:rel "preconnect" :href "https://fonts.gstatic.com" :crossorigin true}]
+           [:link {:href "https://fonts.googleapis.com/css2?family=Luckiest+Guy&family=Rajdhani&display=swap" :rel "stylesheet"}]
            [:meta {:name "viewport"
                    :content "width=device-width, initial-scale=1.0"}]
            [:meta {:charset "utf-8"}]]
           [:body
-           [:div#root]
+           [:div#root "You need javascript to run this app!"]
            [:script {:src "/js/main.js"}]])})
 
 (defn search [{:keys [query-params] :as req}]
