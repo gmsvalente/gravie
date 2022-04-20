@@ -1,7 +1,7 @@
 (ns gravie.frontend.theme
   (:require [reagent-mui.styles :refer [theme-provider create-theme]]
             [reagent-mui.material.css-baseline :refer [css-baseline]]
-            [re-frame.core :as rf]
+            [gravie.frontend.utils :refer [<sub]]
             [gravie.frontend.subs :as subs]))
 
 
@@ -25,8 +25,8 @@
 (defn with-theme
   "Mui theme wraper"
   [& children]
-  (let [theme (rf/subscribe [::subs/theme])]
+  (let [theme (<sub [::subs/theme])]
     (fn []
-      [theme-provider (create-theme (clj->js @theme))
+      [theme-provider (create-theme (clj->js theme))
        [css-baseline]
        (into [:<>] children)])))

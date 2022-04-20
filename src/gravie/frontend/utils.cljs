@@ -1,7 +1,14 @@
-(ns gravie.frontend.utils)
+(ns gravie.frontend.utils
+  (:require [re-frame.core :as rf]))
 
-(defn get-key [e]
+(def <sub (comp deref rf/subscribe))
+
+(defn get-key
+  "Keycode helper"
+  [^js e]
   (.. e -keyCode))
 
-(defn tgt-val [e]
+(defn tgt-val
+  "Target value helper"
+  [^js e]
   (.. e -target -value))
