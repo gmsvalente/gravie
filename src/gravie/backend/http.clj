@@ -16,8 +16,8 @@
                         :headers {:user-agent "ClojureGiantBombs"}
                         :accept :json})
     (catch Exception e
-      (-> (ex-data e)
-          (update :body json/read-json)))))
+      (println "Exception: " (.getMessage e))
+      {:body {:error (.getMessage e)}})))
 
 (defn search-gb [{:strs [query resources]}]
   (let [response (try-search query resources)]
