@@ -6,7 +6,7 @@
               :ui {:logo {:giantbomb nil
                           :gravie nil}}
               :user {}
-              :cart {}
+              :cart []
               :games {}})
 
 (rf/reg-event-db

@@ -10,7 +10,8 @@
             [reagent-mui.material.typography :refer [typography]]
             [reagent-mui.material.fab :refer [fab]]
             [reagent-mui.icons.add-shopping-cart :refer [add-shopping-cart]]
-            [re-frame.core :as rf]))
+            [re-frame.core :as rf]
+            [gravie.frontend.events.cart :as cart]))
 
 (defn show-platforms [platforms]
   [:div {:class "platforms"}
@@ -38,23 +39,28 @@
    ".image" {:height "50%"}})
 
 (defn game-view* [{:keys [class-name game]}]
-  (let [{:keys [name platforms image deck]} game]
-    [:div {:class class-name}
-     [card {:class "card"}
-      [card-header {:title name}]
-      [:div {:class "image"}
-       [card-media {:component "img"
-                    :image (:medium-url image)
-                    :height "100%"}]]
-      [card-content deck]
-      [paper {:class "info"}
-       [card-content 
-        [typography "Platforms:"]
-        [show-platforms platforms]]
-       [card-content {:class "rent-box"}
-        [typography "Price:"]
-        [typography (str "$" (.toFixed (rand 100) 2))]
-        [fab [add-shopping-cart]]]]]]))
+  (let [{:keys [name platforms image deck]} game
+        to-cart (-> game
+                    (select-keys [:name :id])
+                    (merge {:image (:tiny-url image)}))]
+    (fn []
+      [:div {:class class-name}
+       [card {:class "card"}
+        [card-header {:title name}]
+        [:div {:class "image"}
+         [card-media {:component "img"
+                      :image (:medium-url image)
+                      :height "100%"}]]
+        [card-content deck]
+        [paper {:class "info"}
+         [card-content
+          [typography "Platforms:"]
+          [show-platforms platforms]]
+         [card-content {:class "rent-box"}
+          [typography "Price:"]
+          [typography (str "$" (.toFixed (rand 100) 2))]
+          [fab {:on-click (rf/dispatch [::cart/add-to-cart to-cart])}
+           [add-shopping-cart]]]]]])))
 
 
 (def game-view (styled game-view* game-view-styles))
