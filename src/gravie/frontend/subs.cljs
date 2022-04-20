@@ -4,6 +4,17 @@
             [reagent-mui.icons.light-mode :refer [light-mode]]))
 
 (rf/reg-sub
+ ::cart-items
+ (fn [db]
+   (:cart db)))
+
+(rf/reg-sub
+ ::cart-count
+ :<- [::cart-items]
+ (fn [items]
+   (count items)))
+
+(rf/reg-sub
  ::results
  (fn [db]
    (-> db :search-response :results)))
