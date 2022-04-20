@@ -9,12 +9,13 @@
             [reagent-mui.material.typography :refer [typography]]
             [re-frame.core :as rf]
             [gravie.frontend.subs :as subs]
-            [gravie.frontend.events.checkout :as checkout]))
+            [gravie.frontend.events.checkout :as checkout]
+            [gravie.frontend.events.cart :as cart]))
 
 (def checkout-styles
   {})
 
-(defn item-content [{:keys [name price image id]}]
+(defn item-content [{:keys [name price image uuid]}]
   [:div {:style {:display "flex"
                  :justify-content "space-between"
                  :width "100%"}}
@@ -31,21 +32,30 @@
      [typography name]
      [typography {:style {:margin-left "97px"}}
       (str "$ " price)]]]
-   [icon-button [delete-forever]]])
+   [icon-button {:on-click #(rf/dispatch [::cart/delete-item uuid])} [delete-forever]]])
 
 (defn checkout-dialog* [{:keys [class-name]}]
   (let [open? (rf/subscribe [::subs/checkout-open?])
         on-close-fn #(rf/dispatch [::checkout/close])
-        items (rf/subscribe [::subs/cart-items])]
+        items (rf/subscribe [::subs/cart-items])
+        total (fn [items]
+                (->> items
+                     (map :price)
+                     (map #(js/parseFloat %))
+                     (reduce +)))]
     (fn []
       [:div {:class class-name}
        [dialog {:open @open?
                 :on-close on-close-fn
                 :scroll :paper}
         [dialog-title 
-         [typography "Your rent"]]
+         [typography (str "You selected " (count @items) " items")]
+         [typography (str "Total Cost: $" (.toFixed (total @items) 2))]]
         [dialog-content {:dividers true}
-         (for [item @items]
-           [item-content item])]]])))
+         (if (empty? @items)
+           [typography "NO ITEMS TO RENT"]
+           (for [item @items]
+             ^{:key (:uuid item)}
+             [item-content item]))]]])))
 
 (def checkout-dialog (styled checkout-dialog* checkout-styles))

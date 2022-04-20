@@ -58,7 +58,7 @@
          [card-content {:class "rent-box"}
           [typography "Price:"]
           [typography (str "$" price)]
-          [fab {:on-click #(rf/dispatch [::cart/add-to-cart to-cart])}
+          [fab {:on-click #(rf/dispatch [::cart/add-to-cart (assoc to-cart :uuid (random-uuid)) ])}
            [add-shopping-cart]]]]]])))
 
 
