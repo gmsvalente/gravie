@@ -1,8 +1,6 @@
 (ns gravie.backend.routes
   (:require [reitit.ring :as ring ]
             [reitit.ring.middleware.parameters :refer [parameters-middleware]]
-            [reitit.ring.middleware.muuntaja :as muuntaja]
-            [muuntaja.core :as m]
             [gravie.backend.handlers :as h]))
 
 (def routes
@@ -14,9 +12,7 @@
                   :get {:handler h/search}
                   :middleware [parameters-middleware]}]
      ["/checkout" {:name ::checkout
-                   :get {:handler h/checkout}}]]
-    {:data {:muuntaja m/instance
-            :middleware [muuntaja/format-middleware]}})
+                   :get {:handler h/checkout}}]])
    (ring/routes
     (ring/create-file-handler {:path "/"})
     (ring/create-default-handler
