@@ -5,6 +5,10 @@
 (defn land-page [_]
   {:status 200
    :body (hp/html5
+          [:head
+           [:meta {:name "viewport"
+                   :content "width=device-width, initial-scale=1.0"}]
+           [:meta {:charset "utf-8"}]]
           [:div#root]
           [:script {:src "/js/main.js"}])})
 
