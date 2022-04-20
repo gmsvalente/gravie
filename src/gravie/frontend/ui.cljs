@@ -1,5 +1,6 @@
 (ns gravie.frontend.ui
   (:require [gravie.frontend.theme :refer [with-theme]]
+            [gravie.frontend.components.header-box :refer [header-box]]
             [gravie.frontend.components.header :refer [header]]
             [gravie.frontend.components.cart :refer [cart]]
             [gravie.frontend.components.search-bar :refer [search-bar]]
@@ -10,8 +11,9 @@
   "App reagent ui"
   []
   [with-theme
-   [header]
-   [cart]
-   [search-bar]
+   [header-box
+    {:children [[header]
+                [cart]
+                [search-bar]]}]
    [result-view]
    [checkout-dialog]])
