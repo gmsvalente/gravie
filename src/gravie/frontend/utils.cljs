@@ -6,6 +6,7 @@
 
 (def <sub (comp deref rf/subscribe))
 (def >evt rf/dispatch)
+(def >sync rf/dispatch-sync)
 
 (defn get-key
   "Keycode helper"

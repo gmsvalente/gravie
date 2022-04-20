@@ -1,7 +1,8 @@
 (ns gravie.frontend.render
   (:require [reagent.dom :as rdom]
+            [gravie.frontend.utils :refer [>sync]]
             [gravie.frontend.ui :refer [app-ui]]
-            [gravie.frontend.events :refer [initialize-db]]))
+            [gravie.frontend.events.db :as db]))
 
 (defn ^:dev/after-load render
   "Render the app"
@@ -11,5 +12,5 @@
 (defn init
   "Initialize re-frame db and render"
   []
-  (initialize-db)
+  (>sync [::db/init-db])
   (render))
