@@ -15,7 +15,18 @@
  (fn [db]
    (:cart db)))
 
-;;; return cart count
+;;; return cart total price
+(rf/reg-sub
+ ::cart-total-price
+ :<- [::cart-items]
+ (fn [items]
+   (let [total (->> items
+                    (map :price)
+                    (map #(js/parseFloat %))
+                    (reduce +))]
+     (.toFixed total 2))))
+
+;;; return cart items count
 (rf/reg-sub
  ::cart-count
  :<- [::cart-items]
