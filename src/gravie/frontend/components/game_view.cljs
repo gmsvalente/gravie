@@ -40,9 +40,11 @@
 
 (defn game-view* [{:keys [class-name game]}]
   (let [{:keys [name platforms image deck]} game
+        price (.toFixed (rand 100) 2)
         to-cart (-> game
                     (select-keys [:name :id])
-                    (merge {:image (:tiny-url image)}))]
+                    (merge {:price price
+                            :image (:tiny-url image)}))]
     (fn []
       [:div {:class class-name}
        [card {:class "card"}
@@ -58,8 +60,8 @@
           [show-platforms platforms]]
          [card-content {:class "rent-box"}
           [typography "Price:"]
-          [typography (str "$" (.toFixed (rand 100) 2))]
-          [fab {:on-click (rf/dispatch [::cart/add-to-cart to-cart])}
+          [typography (str "$" price)]
+          [fab {:on-click #(rf/dispatch [::cart/add-to-cart to-cart])}
            [add-shopping-cart]]]]]])))
 
 
