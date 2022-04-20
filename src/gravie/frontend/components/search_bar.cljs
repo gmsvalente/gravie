@@ -45,12 +45,12 @@
            [menu-item {:key (:key opt)
                        :value (:name opt)} (:name opt)])]
         [icon-button {:variant "outlined"
-                      :on-click #(>evt [::http/request @search-string @option])}
+                      :on-click #(>evt [::http/request-get @search-string @option])}
          [search]]
         [input-base {:class "input"
                      :on-change #(reset! search-string (tgt-val %))
                      :on-key-down #(when (= 13 (get-key %))
-                                     (>evt [::http/request @search-string @option]))
+                                     (>evt [::http/request-get @search-string @option]))
                      :placeholder (str "Search " (.toUpperCase @option) " here")}]]])))
 
 (def search-bar

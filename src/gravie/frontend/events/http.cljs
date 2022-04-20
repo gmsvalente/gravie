@@ -3,26 +3,21 @@
             [day8.re-frame.http-fx]
             [re-frame.core :as rf]))
 
+;;; on sucess-get insert app-db search-response
 (rf/reg-event-db
- ::results-view
- (fn [db [_ type]]
-   (assoc db :result-view type)))
+ ::success-get
+ (fn [db [_ response]]
+   (assoc db :search-response response)))
 
-(rf/reg-event-fx
- ::success
- (fn [{:keys [db]} [_ type response]]
-   {:db (-> db
-            (assoc :search-response response)
-            (assoc-in [:search-response :type] type ))
-    :fx [[:dispatch [::results-view type]]]}))
-
+;;; on error-get insert app-db error-response
 (rf/reg-event-db
- ::error
+ ::error-get
  (fn [db [_ response]]
    (assoc db :error-response response)))
 
+;;; http server get request
 (rf/reg-event-fx
- ::request
+ ::request-get
  (fn [_ [_ search-string type]]
    {:http-xhrio {:method :get
                  :uri "/search"
@@ -30,5 +25,5 @@
                           :resources type}
                  :format (ajax/json-request-format )
                  :response-format (ajax/json-response-format  {:keywords? true})
-                 :on-success [::success (keyword type)]
-                 :on-failure [::error]}}))
+                 :on-success [::success-get]
+                 :on-failure [::error-get]}}))
