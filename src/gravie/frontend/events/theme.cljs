@@ -3,7 +3,7 @@
             [gravie.frontend.theme :as theme]))
 
 (defn change-mode
-  "Change theme mode helper fn  "
+  "Change theme mode helper fn"
   [mode]
   (condp = mode
     "light" "dark"

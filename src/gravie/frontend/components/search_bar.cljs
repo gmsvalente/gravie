@@ -7,14 +7,16 @@
             [reagent-mui.material.icon-button :refer [icon-button]]
             [reagent-mui.icons.search :refer [search]]
             [reagent.core :as r]
-            [gravie.frontend.utils :refer [get-key tgt-val]]
-            [re-frame.core :as rf]
+            [gravie.frontend.utils :refer [get-key tgt-val <sub >evt]]
             [gravie.frontend.events.http :as http]))
 
-(def search-options [{:name "game"
-                      :key 0}])
+(def search-options
+  "Options vector"
+  [{:name "game"
+    :key 0}])
 
 (def search-bar-style
+  "Search-bar style map"
   {".options" {:width "15ch"
                :margin "10px"}
    ".input-box" {:margin 20
@@ -26,8 +28,9 @@
              :height "100%"
              :margin "15px"}})
 
-
-(defn search-bar* [{:keys [class-name]}]
+(defn search-bar*
+  "Reagent search-bar"
+  [{:keys [class-name]}]
   (let [option (r/atom "")
         search-string (r/atom "")]
     (fn []
@@ -42,12 +45,14 @@
            [menu-item {:key (:key opt)
                        :value (:name opt)} (:name opt)])]
         [icon-button {:variant "outlined"
-                      :on-click #(rf/dispatch [::http/request @search-string @option])}
+                      :on-click #(>evt [::http/request @search-string @option])}
          [search]]
         [input-base {:class "input"
                      :on-change #(reset! search-string (tgt-val %))
                      :on-key-down #(when (= 13 (get-key %))
-                                     (rf/dispatch [::http/request @search-string @option]))
+                                     (>evt [::http/request @search-string @option]))
                      :placeholder (str "Search " (.toUpperCase @option) " here")}]]])))
 
-(def search-bar (styled search-bar* search-bar-style))
+(def search-bar
+  "Styled search-bar"
+  (styled search-bar* search-bar-style))

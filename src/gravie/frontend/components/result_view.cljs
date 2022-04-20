@@ -2,23 +2,27 @@
   (:require [reagent-mui.styles :refer [styled]]
             [reagent-mui.material.grid :refer [grid]]
             [gravie.frontend.components.game-view :refer [game-view]]
-            [re-frame.core :as rf]
+            [gravie.frontend.utils :refer [<sub]]
             [gravie.frontend.subs :as subs]))
 
-(defn result-view-style [theme]
+(defn result-view-style
+  "Result view style map"
+  [theme]
   {".results" {:padding "17px"}})
 
-(defn result-view* [{:keys [class-name]}]
-  (let [games(rf/subscribe [::subs/results])]
-    (fn []
-      [:div {:class class-name}
-       [grid {:class "results"
-              :container true}
-        (for [game @games]
-          ^{:key (:id game)}
-          [grid {:item true
-                 :md 4 :sm 6 :xs 12}
-           [game-view {:game game}]])]])))
+(defn result-view*
+  "Reagent result-view"
+  [{:keys [class-name]}]
+  [:div {:class class-name}
+   [grid {:class "results"
+          :container true}
+    (for [game (<sub [::subs/results])]
+      ^{:key (:id game)}
+      [grid {:item true
+             :md 4 :sm 6 :xs 12}
+       [game-view {:game game}]])]])
 
 
-(def result-view (styled  result-view* result-view-style))
+(def result-view
+  "Styled result-view"
+  (styled  result-view* result-view-style))

@@ -1,21 +1,25 @@
 (ns gravie.frontend.components.header
-  (:require [re-frame.core :as rf]
-            [reagent-mui.styles :refer [styled]]
+  (:require [reagent-mui.styles :refer [styled]]
             [reagent-mui.material.app-bar :refer [app-bar]]
             [reagent-mui.material.toolbar :refer [toolbar]]
             [reagent-mui.material.icon-button :refer [icon-button]]
             [reagent-mui.material.typography :refer [typography]]
-            [reagent-mui.icons.dark-mode :refer [dark-mode]]
             [gravie.frontend.utils :refer [<sub >evt]]
             [gravie.frontend.subs :as subs]
             [gravie.frontend.events.theme :as theme]
             [gravie.frontend.events.db :as db]))
 
-(def giantbomb-logo-src "https://camo.githubusercontent.com/b7216da3d2ecd6101cc024529ef2b5619ba3480a8a7913855817965741a6480b/68747470733a2f2f75706c6f61642e77696b696d656469612e6f72672f77696b6970656469612f656e2f342f34622f4769616e745f426f6d625f6c6f676f2e706e67")
+(def giantbomb-logo-src
+  "Source link to giantbomb logo"
+  "https://camo.githubusercontent.com/b7216da3d2ecd6101cc024529ef2b5619ba3480a8a7913855817965741a6480b/68747470733a2f2f75706c6f61642e77696b696d656469612e6f72672f77696b6970656469612f656e2f342f34622f4769616e745f426f6d625f6c6f676f2e706e67")
 
-(def gravie-logo-src "https://www.gravie.com/wp-content/uploads/2020/08/Blue-Gravie-Logo_400x160.png")
+(def gravie-logo-src
+  "Source link to gravie logo"
+  "https://www.gravie.com/wp-content/uploads/2020/08/Blue-Gravie-Logo_400x160.png")
 
-(defn giantbomb-title []
+(defn giantbomb-title
+  "Giantbomb title fallback"
+  []
   [:div {:class "gb-box-title"}
    [typography {:class "giantbomb-title"
                 :style {:color "red"}}
@@ -23,26 +27,35 @@
    [typography {:class "giantbomb-title"}
     "BOMB"]])
 
-(defn gravie-title []
+(defn gravie-title
+  "Gravie title fallback"
+  []
   [:div 
    [typography {:class "gravie-title"} "Gravie"]] )
 
 
-(defn giantbomb-logo []
+(defn giantbomb-logo
+  "GiantBomb img logo"
+  []
   [:img {:class "giantbomb-logo"
          :src giantbomb-logo-src
          :on-error #(>evt [::db/set-logo :giantbomb (giantbomb-title)])}])
 
-(defn gravie-logo []
-      [:img {:class "gravie-logo"
-             :src gravie-logo-src
-             :on-error #(>evt [::db/set-logo  :gravie (gravie-title)])}])
+(defn gravie-logo
+  "Gravie img logo"
+  []
+  [:img {:class "gravie-logo"
+         :src gravie-logo-src
+         :on-error #(>evt [::db/set-logo :gravie (gravie-title)])}])
 
+;;; send logos to rf/app-db
 (>evt [::db/set-logo :giantbomb (giantbomb-logo)])
 (>evt [::db/set-logo :gravie (gravie-logo)])
 
 
-(defn header-styles [theme]
+(defn header-styles
+  "Styles map"
+  [theme]
   {".bar" {:position "relative"
            :z-indez 1000}
    ".header" {:display "flex"
@@ -66,14 +79,19 @@
    ".giantbomb-title" {:font-family "Luckiest Guy"
                        :font-size 30}})
 
-(defn header* [{:keys [class-name]}]
+(defn header*
+  "Reagent app header"
+  [{:keys [class-name]}]
   [:div {:class class-name }
    [app-bar {:class "bar"}
     [toolbar {:class "header"}
      [:div {:class "logo-box"}
-      @(rf/subscribe [::subs/gravie-logo])
-      @(rf/subscribe [::subs/gb-logo])]
+      (<sub [::subs/gravie-logo])
+      (<sub [::subs/gb-logo])]
      [:div 
-      [icon-button {:on-click #(rf/dispatch [::theme/change-theme-mode])} [@(rf/subscribe [::subs/mode-icon])]]]]]])
+      [icon-button {:on-click #(>evt [::theme/change-theme-mode])}
+       [(<sub [::subs/mode-icon])]]]]]])
 
-(def header (styled header* header-styles))
+(def header
+  "Styled header"
+  (styled header* header-styles))
