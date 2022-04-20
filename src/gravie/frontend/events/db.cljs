@@ -9,11 +9,13 @@
               :cart []
               :games {}})
 
+;;; populate re-frame app-db event
 (rf/reg-event-db
  ::init-db
  (fn [_]
    init-db))
 
+;;; set logo reagent [:img] element event
 (rf/reg-event-db
  ::set-logo
  (fn [db [_ in logo]]
