@@ -4,7 +4,6 @@
             [gravie.frontend.utils :refer [<sub]]
             [gravie.frontend.subs :as subs]))
 
-
 (def system-theme-mode
   "Get system color scheme"
   (let [mode (.. js/window
@@ -15,7 +14,6 @@
       false "light"
       :else "light")))
 
-
 (def custom-theme
   "Custom mui theme"
   {:palette {:primary {:main "#176fd9"}
@@ -25,8 +23,7 @@
 (defn with-theme
   "Mui theme wraper"
   [& children]
-  (let [theme (<sub [::subs/theme])]
-    (fn []
-      [theme-provider (create-theme (clj->js theme))
-       [css-baseline]
-       (into [:<>] children)])))
+  (fn []
+    [theme-provider (create-theme (clj->js (<sub [::subs/theme])))
+     [css-baseline]
+     (into [:<>] children)]))
