@@ -25,7 +25,7 @@
  ::request
  (fn [_ [_ search-string type]]
    {:http-xhrio {:method :get
-                 :uri "/search/"
+                 :uri "/search"
                  :params {:query search-string
                           :resources type}
                  :format (ajax/json-request-format )
