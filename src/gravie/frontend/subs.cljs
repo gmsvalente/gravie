@@ -3,6 +3,12 @@
             [reagent-mui.icons.dark-mode :refer [dark-mode]]
             [reagent-mui.icons.light-mode :refer [light-mode]]))
 
+;;; result view
+(rf/reg-sub
+ ::result-view
+ (fn [db]
+   (-> db :ui :result-view)))
+
 ;;; check if checkout modal element open?
 (rf/reg-sub
  ::checkout-open?

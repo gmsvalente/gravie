@@ -5,9 +5,9 @@
 (def init-db {:theme custom-theme
               :ui {:logo {:giantbomb nil
                           :gravie nil}
-                   :checkout {:open? false}}
-              :cart []
-              :games {}})
+                   :checkout {:open? false}
+                   :result-view nil}
+              :cart []})
 
 ;;; populate re-frame app-db event
 (rf/reg-event-db

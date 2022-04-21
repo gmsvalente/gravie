@@ -2,14 +2,30 @@
   (:require [ajax.core :as ajax]
             [day8.re-frame.http-fx]
             [re-frame.core :as rf]
+            [gravie.frontend.components.result-view :refer [game-result-view notfound-result-view]]
             [gravie.frontend.events.cart :as cart]
-            [gravie.frontend.events.checkout :as checkout]))
+            [gravie.frontend.events.checkout :as checkout]
+            [gravie.frontend.events.result-view :as result-view]))
+
+(def get-view
+  (rf/->interceptor
+   :id :get-view
+   :before  (fn [ctx]
+              (let [{:keys [event]} (:coeffects ctx)
+                    result (second event)
+                    total  (:number_of_total_results result)
+                    view (if (pos? total)
+                           game-result-view
+                           notfound-result-view)]
+                (assoc-in ctx [:coeffects :event 2] view)))))
 
 ;;; on sucess-get insert app-db search-response
-(rf/reg-event-db
+(rf/reg-event-fx
  ::success-get
- (fn [db [_ response]]
-   (assoc db :search-response response)))
+ [get-view]
+ (fn [{:keys [db]} [_ response view]]
+   {:db (assoc db :search-response response)
+    :fx [[:dispatch [::result-view/add-view view]]]}))
 
 ;;; on error-get insert app-db error-response
 (rf/reg-event-db
