@@ -2,4 +2,4 @@
 
 echo "Creating main.js release"
 
-clj -M:shadow:shadow-release
+clojure -M:shadow:shadow-release

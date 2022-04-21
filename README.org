@@ -1,1 +1,32 @@
 * Gravie Challenge
+  This is the Gravie Challenge Test
+  
+  You need to have this tools installed to build the app
+  - npm
+  - clojure
+
+* Installed on localhost
+
+  To get the app clone the git repository
+  #+begin_src shell :eval false
+  git clone https://github.com/gmsvalente/gravie.git
+  #+end_src
+
+  On the root of the repository run
+  #+begin_src shell :eval false
+  npm install
+  clojure -M:shadow:shadow-release
+  #+end_src
+  It will install the npm dependencies and build the main.js from shadow-cljs
+
+  To run the application you need to specify a server port or it will use port 8080
+  You need also an api-key from [[giantbomb.com/api]]
+
+  #+begin_src shell :eval false
+  export PORT=<port number>
+  export GIANTBOMB_API=<your api-key>
+  clojure -M:server
+  #+end_src
+
+  
+

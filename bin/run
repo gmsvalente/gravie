@@ -2,4 +2,4 @@
 
 export PORT=3000
 
-clj -M -m gravie.backend.server
+clojure -M -m gravie.backend.server
