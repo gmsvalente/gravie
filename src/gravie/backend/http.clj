@@ -1,27 +1,38 @@
 (ns gravie.backend.http
-  (:require [clj-http.client :as client]))
+  (:require [clj-http.client :as client]
+            [environ.core :refer [env]]))
 
-(def api "5af4db5be8e3d4d626e3640e67a79d12dd5e6482")
 
-(def gb-uri "https://www.giantbomb.com/api/search")
+(def gb-api
+  "Get giantbomb api from environment"
+  (:giantbomb-api env))
 
-(defn try-search [query resources]
+(def gb-uri
+  "Giantbomb uri"
+  "https://www.giantbomb.com/api/search")
+
+(defn try-search
+  "Try to GET from Giantbomb server"
+  [query resources]
   (try
-    (client/get gb-uri {:query-params {:api_key api
+    (client/get gb-uri {:query-params {:api_key gb-api
                                        :format "json"
                                        :query query
-                                       :field_list "name,id,image,platforms,description,deck"
+                                       :field_list "name,id,image,platforms,deck"
                                        :resources resources}
                         :headers {:user-agent "ClojureGiantBombs"}
                         :accept :json})
     (catch Exception e
-      (println "Exception: " (.getMessage e))
-      {:body {:error (.getMessage e)}})))
+      (println "Exception: " (.getMessage e)))))
 
-(defn search-gb [{:strs [query resources]}]
+(defn search-gb
+  "Helper function to return body response"
+  [{:strs [query resources]}]
   (let [response (try-search query resources)]
     (:body response)))
 
-(defn checkout-cart [{:keys [data] :as body}]
+(defn checkout-cart
+  "Pring a checkout request"
+  [{:keys [data] :as body}]
   (println "Your request to rent is completed, but wait! we have no db yet!\n" data)
   body)

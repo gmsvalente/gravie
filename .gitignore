@@ -1,5 +1,5 @@
 .nrepl-port
-
+.gbapi
 .cpcache/
 .backups~/
 .shadow-cljs/
