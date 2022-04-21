@@ -17,7 +17,7 @@
 
 (def custom-theme
   "Custom mui theme"
-  {:palette {:primary colors/yellow
+  {:palette {:primary colors/indigo
              :secondary {:main "#ec2024"}
              :mode system-theme-mode}})
 
