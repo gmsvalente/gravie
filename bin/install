@@ -1,0 +1,9 @@
+#!/bin/bash
+
+echo "Installing npm dependencies"
+
+npm install
+
+echo "Creating main.js release"
+
+npm run release

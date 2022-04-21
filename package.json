@@ -8,5 +8,23 @@
   },
   "devDependencies": {
     "shadow-cljs": "^2.18.0"
-  }
+  },
+  "name": "gravie-developer-test",
+  "description": "* Gravie Challenge",
+  "version": "1.0.0",
+  "main": "index.js",
+  "scripts": {
+    "release": "shadow-cljs release :gravie"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/gmsvalente/gravie.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/gmsvalente/gravie/issues"
+  },
+  "homepage": "https://github.com/gmsvalente/gravie#readme"
 }
