@@ -1,11 +1,14 @@
 * Gravie Challenge
   This is the Gravie Challenge Test
   
-  You need to have this tools installed to build the app
-  - npm
-  - clojure
+  A simple(?) app based on giantbomb site.
 
-* Installed on localhost
+* Stack needed to install
+** npm
+** Clojure
+** Clojurescript   
+
+* Install
   To get the app clone the git repository
   #+begin_src shell :eval false
   git clone https://github.com/gmsvalente/gravie.git
