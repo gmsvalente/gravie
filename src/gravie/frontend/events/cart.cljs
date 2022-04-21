@@ -12,3 +12,9 @@
  ::delete-item
  (fn [db [_ item-uuid]]
    (update db :cart #(remove (fn [u] (= (:uuid u) item-uuid)) %))))
+
+;;; clear cart
+(rf/reg-event-db
+ ::clear-cart
+ (fn [db _]
+   (assoc db :cart [])))
