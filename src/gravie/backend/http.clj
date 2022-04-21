@@ -21,3 +21,7 @@
 (defn search-gb [{:strs [query resources]}]
   (let [response (try-search query resources)]
     (:body response)))
+
+(defn checkout-cart [{:keys [data] :as body}]
+  (println "Your request to rent is completed, but wait! we have no db yet!\n" data)
+  body)
