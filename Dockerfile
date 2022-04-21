@@ -2,7 +2,7 @@ FROM node:alpine AS node
 
 WORKDIR /app
 
-COPY --chmod="755" package.json /app
+COPY  package.json /app
 
 RUN npm install
 
