@@ -24,4 +24,4 @@
                         reagent/reagent {:mvn/version "1.1.0" :exclusions [cljsjs/react cljsjs/react-dom]}
                         arttuka/reagent-material-ui {:mvn/version "5.2.4-0"}}}
 
-  :shadow-release {:main-opts ["-m" "shadow.cljs.devtools.cli" "release" ":hekommerce"]}}}
+  :shadow-release {:main-opts ["-m" "shadow.cljs.devtools.cli" "release" ":gravie"]}}}
