@@ -8,6 +8,7 @@
   [{:keys [theme]}]
   {".box"  {:position "fixed"
             :width "100%"
+            :height "170px"
             :z-index 500
             :background-color (-> theme :palette :primary :dark)}
 })

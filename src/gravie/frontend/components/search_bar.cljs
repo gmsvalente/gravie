@@ -19,8 +19,7 @@
   "Search-bar style map"
   {".options" {:width "15ch"
                :margin "10px"}
-   ".input-box" {:margin 20
-                 :margin-top 40
+   ".input-box" {:margin "8px 20px auto"
                  :width "80%"
                  :display "flex"
                  :align-items "center"}

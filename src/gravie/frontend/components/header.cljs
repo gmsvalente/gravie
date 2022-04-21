@@ -62,7 +62,7 @@
    ".header" {:display "flex"
               :justify-content "space-between"
               :align-items "center"
-              :height "100px"}
+              :height "78px"}
    ".logo-box" {:display "flex"
                 :width "340px"
                 :justify-content "space-around"

@@ -11,7 +11,7 @@
   "Result view style map"
   [theme]
   {".results" {:position "absolute"
-               :margin-top "250px"
+               :margin-top "150px"
                :padding "17px"}
    ".not-found" {:padding "20px"}})
 
