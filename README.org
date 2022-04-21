@@ -4,9 +4,9 @@
   A simple(?) app based on giantbomb site.
 
 * Stack needed to install
-** npm
-** Clojure
-** Clojurescript   
+ - npm
+ - Clojure
+ - Clojurescript   
 
 * Install
   To get the app clone the git repository
