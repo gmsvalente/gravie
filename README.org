@@ -6,7 +6,6 @@
   - clojure
 
 * Installed on localhost
-
   To get the app clone the git repository
   #+begin_src shell :eval false
   git clone https://github.com/gmsvalente/gravie.git
@@ -28,5 +27,22 @@
   clojure -M:server
   #+end_src
 
-  
+* Using docker
+  You can create a docker image. You need docker installed local
+  Clone the repository and on the root directory
+  #+begin_src shell :eval false
+  docker build -t <build-name> .
+  #+end_src
+
+  Where <build-name> is the name of the image created then run it in a container
+  #+begin_src shell :eval false
+  docker run --name <container-name> -e "PORT=<port>" -e "GIANTBOMB_API=<api-key>" -p <local-port>:<port> <build-name>
+  #+end_src
+
+
+* Things I wish i have done
+  - TESTS! TDD could really improve the production
+  - Used a database like postgres or even datomic or XTDB
+
+   
 
