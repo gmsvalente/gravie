@@ -7,6 +7,7 @@
             [gravie.frontend.events.checkout :as checkout]
             [gravie.frontend.events.result-view :as result-view]))
 
+;;; get the view depending on results
 (def get-view
   (rf/->interceptor
    :id :get-view
@@ -17,7 +18,7 @@
                     view (if (pos? total)
                            game-result-view
                            notfound-result-view)]
-                (assoc-in ctx [:coeffects :event 2] view)))))
+                (update-in ctx [:coeffects :event] conj view)))))
 
 ;;; on sucess-get insert app-db search-response
 (rf/reg-event-fx
