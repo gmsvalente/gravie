@@ -12,7 +12,8 @@
             [gravie.frontend.utils :refer [<sub >evt]]
             [gravie.frontend.subs :as subs]
             [gravie.frontend.events.checkout :as checkout]
-            [gravie.frontend.events.cart :as cart]))
+            [gravie.frontend.events.cart :as cart]
+            [gravie.frontend.events.http :as http]))
 
 ;;; does not work possible because dialog mui element
 (def checkout-styles
@@ -47,7 +48,9 @@
         on-close-fn #(>evt [::checkout/close])
         items (<sub [::subs/cart-items])
         items-count (<sub [::subs/cart-count])
-        total (<sub [::subs/cart-total-price])]
+        total (<sub [::subs/cart-total-price])
+        order {:order-id (random-uuid)
+               :cart (map #(select-keys % [:name :price :id :uuid]) items)}]
     [:div {:class class-name}
      [dialog {:open open?
               :on-close on-close-fn
@@ -65,7 +68,9 @@
        [button {:on-click on-close-fn
                 :variant "outlined"
                 :color "warning"} "Rent more!"]
-       [button {:variant "contained"
+       [button {:on-click #(>evt [::http/request-post order])
+                :variant "contained"
+                :disabled (empty? items)
                 :color "success"} "Checkout"]]]]))
 
 (def checkout-dialog
